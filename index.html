@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nishant Gadde</title>
+<meta name="description" content="Nishant Gadde — ECE Honors & Mathematics at UT Austin. ML / quant research: vision-language models, low-latency systems, and quantitative finance." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23bf5700'/><text x='50' y='71' font-size='62' font-family='Georgia,serif' fill='white' text-anchor='middle'>N</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Spline+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#fbfaf7;
+    --bg-card:#ffffff;
+    --ink:#1c1a17;
+    --ink-soft:#4a463f;
+    --ink-faint:#8a847a;
+    --line:#e9e4da;
+    --accent:#bf5700;       /* UT Austin burnt orange */
+    --accent-soft:#f4ede4;
+    --serif:"Newsreader",Georgia,serif;
+    --sans:"Spline Sans",-apple-system,system-ui,sans-serif;
+    --maxw:880px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.65;
+    font-size:17px;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    background-image:
+      radial-gradient(circle at 12% -8%, rgba(191,87,0,.05), transparent 38%),
+      radial-gradient(circle at 92% 4%, rgba(191,87,0,.04), transparent 34%);
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px}
+
+  /* ---------- intro ---------- */
+  header{padding:88px 0 40px}
+  .intro{display:grid;grid-template-columns:150px 1fr;gap:42px;align-items:start}
+  .avatar{
+    width:150px;height:150px;border-radius:50%;
+    display:grid;place-items:center;
+    background:
+      radial-gradient(circle at 30% 24%, #d96f12, #bf5700 62%, #8f3f00);
+    color:#fff;font-family:var(--serif);font-weight:500;font-size:62px;
+    letter-spacing:1px;
+    box-shadow:0 14px 34px -14px rgba(191,87,0,.55), inset 0 2px 6px rgba(255,255,255,.25);
+    position:relative;
+  }
+  .avatar span{transform:translateY(-2px)}
+  .hello-name{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+  .hook{font-size:30px}
+  h1{font-family:var(--serif);font-weight:600;font-size:42px;letter-spacing:-.5px;line-height:1.05}
+  .intro p{color:var(--ink-soft);margin-bottom:15px;max-width:60ch}
+  a.link{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(191,87,0,.32);transition:border-color .18s,background .18s}
+  a.link:hover{border-bottom-color:var(--accent);background:var(--accent-soft)}
+
+  /* ---------- contact buttons ---------- */
+  .links{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:9px 16px;border:1px solid var(--line);border-radius:9px;
+    background:var(--bg-card);color:var(--ink);text-decoration:none;
+    font-size:14.5px;font-weight:500;
+    box-shadow:0 1px 0 rgba(0,0,0,.02);
+    transition:transform .16s,border-color .16s,box-shadow .16s,color .16s;
+  }
+  .btn svg{width:16px;height:16px}
+  .btn:hover{transform:translateY(-2px);border-color:var(--accent);color:var(--accent);box-shadow:0 10px 22px -14px rgba(191,87,0,.5)}
+
+  /* ---------- section ---------- */
+  section{padding:30px 0}
+  .sec-head{font-family:var(--serif);font-size:30px;font-weight:600;letter-spacing:-.3px;margin-bottom:22px;display:flex;align-items:baseline;gap:14px}
+  .sec-head::after{content:"";flex:1;height:1px;background:var(--line)}
+
+  /* ---------- publications ---------- */
+  .pub{
+    display:grid;grid-template-columns:200px 1fr;gap:26px;
+    background:var(--bg-card);border:1px solid var(--line);border-radius:16px;
+    padding:22px;margin-bottom:20px;
+    transition:transform .2s,box-shadow .2s,border-color .2s;
+  }
+  .pub:hover{transform:translateY(-3px);box-shadow:0 22px 46px -28px rgba(28,26,23,.4);border-color:#dcd5c8}
+  .thumb{
+    border-radius:11px;aspect-ratio:4/3;overflow:hidden;
+    display:grid;place-items:center;text-align:center;color:#fff;padding:14px;
+    font-family:var(--serif);position:relative;
+  }
+  .thumb.a4d{background:linear-gradient(135deg,#23303a,#3a5566 55%,#6f8a6b)}
+  .thumb.opf{background:linear-gradient(135deg,#7a2e00,#bf5700 60%,#e08a2e)}
+  .thumb.ecg{background:linear-gradient(135deg,#3a1c44,#7c2c63 60%,#c0497a)}
+  .thumb .tag{font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+  .thumb .big{font-size:26px;line-height:1.05;margin-top:6px;font-weight:500}
+  .thumb .sub{font-family:var(--sans);font-size:12px;opacity:.85;margin-top:8px}
+  .thumb .grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.08) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.08) 1px,transparent 1px);background-size:22px 22px;mask:radial-gradient(circle at 70% 30%,#000,transparent 75%)}
+  .pub-body h3{font-family:var(--serif);font-size:21px;font-weight:600;line-height:1.25;color:var(--accent);margin-bottom:9px}
+  .badge{display:inline-block;font-size:11.5px;font-weight:600;letter-spacing:.04em;color:var(--ink-soft);background:var(--accent-soft);border:1px solid #ecdcc8;padding:3px 10px;border-radius:20px;margin-bottom:10px}
+  .authors{font-size:14.5px;color:var(--ink-soft);margin-bottom:9px}
+  .authors b{color:var(--ink)}
+  .pub-body p{font-size:14.5px;color:var(--ink-soft);margin-bottom:14px}
+  .pills{display:flex;flex-wrap:wrap;gap:8px}
+  .pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;text-decoration:none;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 12px;transition:border-color .15s,color .15s,background .15s}
+  .pill:hover{border-color:var(--accent);color:var(--accent);background:var(--accent-soft)}
+  .pill svg{width:14px;height:14px}
+
+  /* ---------- experience ---------- */
+  .xp{border-left:2px solid var(--line);margin-left:6px;padding-left:24px}
+  .xp-item{position:relative;padding-bottom:24px}
+  .xp-item:last-child{padding-bottom:0}
+  .xp-item::before{content:"";position:absolute;left:-31px;top:6px;width:11px;height:11px;border-radius:50%;background:var(--bg);border:2px solid var(--accent)}
+  .xp-top{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:baseline}
+  .xp-role{font-weight:600;font-size:16.5px}
+  .xp-org{color:var(--accent);font-weight:500}
+  .xp-date{font-size:13.5px;color:var(--ink-faint);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .xp-item p{font-size:14.5px;color:var(--ink-soft);margin-top:4px;max-width:62ch}
+
+  /* ---------- chips ---------- */
+  .chip-group{margin-bottom:14px}
+  .chip-label{font-size:13px;font-weight:600;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-size:13.5px;background:var(--bg-card);border:1px solid var(--line);border-radius:7px;padding:5px 11px;color:var(--ink-soft)}
+  .honor{display:flex;gap:12px;align-items:flex-start;background:var(--bg-card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .honor .star{color:var(--accent);font-size:20px;line-height:1.2}
+  .honor b{color:var(--ink)}
+
+  footer{padding:48px 0 64px;color:var(--ink-faint);font-size:13.5px;text-align:center;border-top:1px solid var(--line);margin-top:24px}
+  footer a{color:var(--ink-faint)}
+
+  /* ---------- entrance animation ---------- */
+  .reveal{opacity:0;transform:translateY(14px);animation:rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+  @keyframes rise{to{opacity:1;transform:none}}
+
+  @media(max-width:720px){
+    body{font-size:16px}
+    header{padding:56px 0 24px}
+    .intro{grid-template-columns:1fr;gap:24px}
+    .avatar{width:104px;height:104px;font-size:44px}
+    h1{font-size:34px}
+    .pub{grid-template-columns:1fr;gap:18px}
+    .thumb{aspect-ratio:16/7}
+    .sec-head{font-size:25px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ===================== INTRO ===================== -->
+  <header>
+    <div class="intro">
+      <!-- Swap this monogram for a photo: replace the div with
+           <img class="avatar" src="photo.jpg" alt="Nishant Gadde"> -->
+      <div class="avatar reveal" style="animation-delay:.02s"><span>NG</span></div>
+      <div>
+        <div class="hello-name reveal" style="animation-delay:.06s">
+          <span class="hook" title="Hook 'em">&#129304;</span>
+          <h1>Nishant Gadde</h1>
+        </div>
+        <p class="reveal" style="animation-delay:.12s">
+          I am pursuing a B.S. in <a class="link" href="https://www.ece.utexas.edu/">Electrical &amp; Computer Engineering (Honors)</a>
+          and <a class="link" href="https://www.ma.utexas.edu/">Mathematics</a> at
+          <a class="link" href="https://www.utexas.edu/">The University of Texas at Austin</a>, graduating in May 2028
+          with a 3.91 GPA.
+        </p>
+        <p class="reveal" style="animation-delay:.18s">
+          This summer I'm a Machine Learning Engineer Intern on the <b>AI Infrastructure</b> team at
+          <a class="link" href="https://www.apple.com/">Apple</a>, working on low-latency model serving.
+          I research vision-language models at the
+          <a class="link" href="https://oden.utexas.edu/">Oden Institute</a>, where I co-developed
+          <a class="link" href="https://a4dance-reasoning.github.io/">A4D</a> for affordance reasoning.
+          Previously I worked on grid optimization at the
+          <a class="link" href="https://s3l.stanford.edu/">Stanford S3L</a>, time-series forecasting at Rayfield Systems,
+          and ECG modeling at <a class="link" href="https://www.gatech.edu/">Georgia Tech</a>.
+        </p>
+        <p class="reveal" style="animation-delay:.24s">
+          My interests sit at the intersection of <b>machine learning</b>, <b>low-latency systems</b>, and
+          <b>quantitative finance</b> &mdash; from VLM-based planning and uncertainty quantification to
+          lock-free order books and statistical arbitrage. I have four published/accepted papers and compete in
+          USACO Platinum (top&nbsp;100 worldwide, 2024&ndash;25).
+        </p>
+
+        <div class="links reveal" style="animation-delay:.30s">
+          <a class="btn" href="mailto:nishantg@utexas.edu">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            Email
+          </a>
+          <a class="btn" href="https://github.com/Nishant27-2006" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.39 9.39 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
+            GitHub
+          </a>
+          <a class="btn" href="https://www.linkedin.com/in/nishant-gadde" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14ZM7.12 20.45H3.55V9h3.57v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.22.79 24 1.77 24h20.45c.98 0 1.78-.78 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+            LinkedIn
+          </a>
+          <a class="btn" href="nishant-gadde-cv.pdf" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M12 18v-6M9 15l3 3 3-3"/></svg>
+            CV
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== PUBLICATIONS ===================== -->
+  <section id="publications">
+    <h2 class="sec-head reveal" style="animation-delay:.1s">Publications</h2>
+
+    <!-- A4D -->
+    <article class="pub reveal" style="animation-delay:.16s">
+      <div class="thumb a4d">
+        <div class="grid-lines"></div>
+        <div style="position:relative">
+          <div class="tag">Vision-Language &middot; Robotics</div>
+          <div class="big">A4D</div>
+          <div class="sub">Functional latent spaces for affordance reasoning</div>
+        </div>
+      </div>
+      <div class="pub-body">
+        <h3>What Objects Enable, Not What They Are: Functional Latent Spaces for Affordance Reasoning</h3>
+        <span class="badge">CoRL 2026 &middot; Under Review</span>
+        <div class="authors">
+          Siva, R., Bhatt, N. P., Yang, Y., Lee, S., <b>Gadde, N.</b>, Ellis, C., Velasquez, A., Wang, Z., Topcu, U.
+        </div>
+        <p>
+          A4D maps visual observations into a shared functional latent space structured around affordances
+          (e.g.&nbsp;"movable"), enabling robot planning based on task-relevant object functionalities rather than
+          appearance alone. It reaches <b>94% inference accuracy</b> &mdash; over 15 points above a GPT-5-class baseline &mdash;
+          while delivering <b>22&nbsp;ms latency (~100&times; faster)</b> with isotonic-calibrated uncertainty for fallback.
+        </p>
+        <div class="pills">
+          <a class="pill" href="https://a4dance-reasoning.github.io/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20"/></svg>
+            Project Page
+          </a>
+          <a class="pill" href="https://arxiv.org/abs/2606.05533" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+            arXiv
+          </a>
+          <a class="pill" href="https://github.com/Nishant27-2006" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-.88-.01-1.73-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.49-1.11-1.49-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05a9.39 9.39 0 0 1 5 0c1.91-1.32 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.81-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/></svg>
+            Code
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Optimal Power Flow (IEEE CAI) -->
+    <article class="pub reveal" style="animation-delay:.22s">
+      <div class="thumb opf">
+        <div class="grid-lines"></div>
+        <div style="position:relative">
+          <div class="tag">Deep Learning &middot; Power Systems</div>
+          <div class="big">AC-OPF</div>
+          <div class="sub">Learning to approximate non-convex optimal power flow</div>
+        </div>
+      </div>
+      <div class="pub-body">
+        <h3>Deep Network Approximation of Non-Convex AC Optimal Power Flow</h3>
+        <span class="badge">IEEE CAI 2025</span>
+        <div class="authors"><b>Gadde, N.</b> et&nbsp;al. &middot; Stanford Sustainability Systems Laboratory (S3L)</div>
+        <p>
+          Approximates non-convex AC optimal power flow with deep networks, achieving a <b>&lt;1% optimality gap</b>
+          at <b>~1000&times; lower solve time</b> than a conventional solver. Feasibility is enforced through SOCP convex
+          relaxations during training, with PCA-compressed grid features for stronger generalization.
+        </p>
+        <div class="pills">
+          <a class="pill" href="https://ieeexplore.ieee.org/abstract/document/11050518" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+            IEEE Xplore
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ECG (IEEE ICMLCA) -->
+    <article class="pub reveal" style="animation-delay:.28s">
+      <div class="thumb ecg">
+        <div class="grid-lines"></div>
+        <div style="position:relative">
+          <div class="tag">Biomedical Signal Processing</div>
+          <div class="big">ECG&nbsp;CNN+SVM</div>
+          <div class="sub">Hybrid pipeline for cardiac signal classification</div>
+        </div>
+      </div>
+      <div class="pub-body">
+        <h3>Hybrid CNN+SVM Pipeline for ECG Classification</h3>
+        <span class="badge">IEEE ICMLCA 2025</span>
+        <div class="authors"><b>Gadde, N.</b> et&nbsp;al. &middot; Cardiovascular Fluid Mechanics Lab, Georgia Tech</div>
+        <p>
+          A hybrid CNN+SVM pipeline on PhysioNet ECG signals combining engineered temporal features
+          (QRS duration, RR intervals) with FFT frequency-domain features, reaching <b>100% accuracy</b> under
+          stratified K-fold cross-validation.
+        </p>
+        <div class="pills">
+          <a class="pill" href="https://ieeexplore.ieee.org/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+            IEEE ICMLCA
+          </a>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ===================== EXPERIENCE ===================== -->
+  <section id="experience">
+    <h2 class="sec-head reveal">Experience &amp; Research</h2>
+    <div class="xp">
+      <div class="xp-item reveal">
+        <div class="xp-top">
+          <div><span class="xp-role">ML Engineer Intern, AI Infrastructure</span> &middot; <span class="xp-org">Apple</span></div>
+          <span class="xp-date">Jun&ndash;Aug 2026</span>
+        </div>
+        <p>Selected for a graduate-scoped role on the AI infrastructure team. Working on low-latency inference serving (request batching, caching, accelerator utilization) and tooling for serving reliability at high QPS.</p>
+      </div>
+      <div class="xp-item reveal">
+        <div class="xp-top">
+          <div><span class="xp-role">Research Assistant, Vision-Language Models</span> &middot; <span class="xp-org">Oden Institute, UT Austin</span></div>
+          <span class="xp-date">Jan 2026&ndash;Present</span>
+        </div>
+        <p>Co-developed A4D, a functional-latent-space framework for affordance reasoning, raising unseen-affordance accuracy from ~70% to &gt;90% with only 16 labeled examples; paper submitted to CoRL 2026.</p>
+      </div>
+      <div class="xp-item reveal">
+        <div class="xp-top">
+          <div><span class="xp-role">ML Engineer Intern</span> &middot; <span class="xp-org">Rayfield Systems</span></div>
+          <span class="xp-date">Jun&ndash;Aug 2025</span>
+        </div>
+        <p>Built LSTM time-series forecasting models in PyTorch for high-frequency sensor signals (~30% lower error), deployed streaming inference on Spark/Kafka, and quantized weights for ~4&times; lower memory on edge.</p>
+      </div>
+      <div class="xp-item reveal">
+        <div class="xp-top">
+          <div><span class="xp-role">Research Assistant</span> &middot; <span class="xp-org">Stanford S3L</span></div>
+          <span class="xp-date">Jun 2024&ndash;Aug 2025</span>
+        </div>
+        <p>Co-authored an IEEE CAI paper approximating non-convex AC optimal power flow with deep networks &mdash; &lt;1% optimality gap at ~1000&times; lower solve time.</p>
+      </div>
+      <div class="xp-item reveal">
+        <div class="xp-top">
+          <div><span class="xp-role">Research Intern</span> &middot; <span class="xp-org">Georgia Tech</span></div>
+          <span class="xp-date">Jun&ndash;Dec 2024</span>
+        </div>
+        <p>Built a hybrid CNN+SVM ECG pipeline on PhysioNet signals; co-authored a paper accepted at IEEE ICMLCA 2025.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROJECTS ===================== -->
+  <section id="projects">
+    <h2 class="sec-head reveal">Selected Projects</h2>
+    <div class="xp">
+      <div class="xp-item reveal">
+        <div class="xp-top">
+          <div><span class="xp-role">C++ Low-Latency Order Book Engine</span></div>
+          <span class="xp-date">2026</span>
+        </div>
+        <p>Price-level limit order book with O(1) insert/cancel via lock-free ring buffers, sustaining &gt;1M msgs/sec. Profiled with perf &amp; Valgrind to cut p99.9 latency ~40% to sub-microsecond; market-making layer with inventory-risk controls.</p>
+      </div>
+      <div class="xp-item reveal">
+        <div class="xp-top">
+          <div><span class="xp-role">Statistical Arbitrage Engine</span></div>
+          <span class="xp-date">2026</span>
+        </div>
+        <p>Screened 500+ equity pairs for cointegration (Johansen) with OU-process entry signals and Kalman-filtered hedge ratios. Walk-forward out-of-sample Sharpe ≈ 1.8 under modeled transaction costs.</p>
+      </div>
+      <div class="xp-item reveal">
+        <div class="xp-top">
+          <div><span class="xp-role">Monte Carlo Derivatives Pricer</span></div>
+          <span class="xp-date">2025</span>
+        </div>
+        <p>Priced European &amp; path-dependent options via 1M+ path GBM simulation; ~10&times; variance reduction with antithetic/control variates, converging within 0.5% of Black-Scholes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== SKILLS & HONORS ===================== -->
+  <section id="skills">
+    <h2 class="sec-head reveal">Skills &amp; Honors</h2>
+    <div class="honor reveal" style="margin-bottom:22px">
+      <span class="star">&#9733;</span>
+      <div><b>USACO Platinum Division</b> (top tier, ~top 1%) &mdash; ranked <b>top 100 worldwide</b> in the 2024&ndash;25 competitive-programming season.</div>
+    </div>
+    <div class="chip-group reveal">
+      <div class="chip-label">Programming</div>
+      <div class="chips">
+        <span class="chip">C++ (primary)</span><span class="chip">Python</span><span class="chip">SQL</span>
+        <span class="chip">Rust</span><span class="chip">Java</span><span class="chip">MATLAB</span><span class="chip">Bash</span>
+      </div>
+    </div>
+    <div class="chip-group reveal">
+      <div class="chip-label">Math &amp; Quant</div>
+      <div class="chips">
+        <span class="chip">Probability &amp; Statistics</span><span class="chip">Stochastic Calculus</span>
+        <span class="chip">Optimization</span><span class="chip">Time-Series</span><span class="chip">Monte Carlo</span>
+        <span class="chip">Kalman Filtering</span><span class="chip">Market Microstructure</span>
+      </div>
+    </div>
+    <div class="chip-group reveal">
+      <div class="chip-label">ML &amp; Systems</div>
+      <div class="chips">
+        <span class="chip">PyTorch</span><span class="chip">TensorFlow</span><span class="chip">XGBoost</span>
+        <span class="chip">Spark</span><span class="chip">Kafka</span><span class="chip">Docker</span><span class="chip">Linux</span><span class="chip">CMake</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Nishant Gadde &middot; The University of Texas at Austin &middot;
+    <a href="mailto:nishantg@utexas.edu">nishantg@utexas.edu</a><br/>
+    Built with HTML &amp; CSS &middot; hosted on GitHub Pages
+  </footer>
+
+</div>
+</body>
+</html>
