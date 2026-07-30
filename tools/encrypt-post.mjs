@@ -76,6 +76,37 @@ async function seal(bytes) {
   return { iv: b64(iv), ct };
 }
 
+/* ---------- image dimensions ---------- */
+
+// blog.html reserves each photo's exact box before the bytes arrive, so it needs
+// the real pixel size. Returns null for formats we don't parse; the reader then
+// just lets the photo size itself naturally.
+function imageSize(buf) {
+  if (buf.length > 24 && buf.readUInt32BE(0) === 0x89504e47) {
+    return { w: buf.readUInt32BE(16), h: buf.readUInt32BE(20) }; // PNG IHDR
+  }
+  if (buf.length > 4 && buf[0] === 0xff && buf[1] === 0xd8) {
+    let i = 2;
+    while (i + 9 < buf.length) {
+      if (buf[i] !== 0xff) { i++; continue; }
+      const marker = buf[i + 1];
+      if (marker === 0xd8 || marker === 0x01 || (marker >= 0xd0 && marker <= 0xd7)) {
+        i += 2;
+        continue;
+      }
+      const len = buf.readUInt16BE(i + 2);
+      // SOF0..SOF15, excluding DHT (C4), JPG (C8) and DAC (CC)
+      const isSOF =
+        marker >= 0xc0 && marker <= 0xcf &&
+        marker !== 0xc4 && marker !== 0xc8 && marker !== 0xcc;
+      if (isSOF) return { h: buf.readUInt16BE(i + 5), w: buf.readUInt16BE(i + 7) };
+      if (len < 2) break;
+      i += 2 + len;
+    }
+  }
+  return null;
+}
+
 /* ---------- photos ---------- */
 
 const mediaDir = join(dirname(draftPath), 'media');
@@ -95,9 +126,20 @@ if (existsSync(mediaDir)) {
     const bytes = readFileSync(join(mediaDir, file));
     const { iv, ct } = await seal(bytes);
     writeFileSync(join(MEDIA_OUT, id + '.enc'), Buffer.from(ct));
-    manifest[id] = { file: 'media/' + id + '.enc', iv, mime: MIME[extname(file).toLowerCase()] };
+
+    const dims = imageSize(bytes);
+    manifest[id] = {
+      file: 'media/' + id + '.enc',
+      iv,
+      mime: MIME[extname(file).toLowerCase()],
+    };
+    if (dims) manifest[id].dims = dims;
+
     mediaBytes += ct.length;
-    console.error(`  photo ${id}: ${(bytes.length / 1024).toFixed(0)} KB -> media/${id}.enc`);
+    console.error(
+      `  photo ${id}: ${(bytes.length / 1024).toFixed(0)} KB` +
+      `${dims ? ` (${dims.w}x${dims.h})` : ' (size unknown)'} -> media/${id}.enc`
+    );
   }
 }
 
