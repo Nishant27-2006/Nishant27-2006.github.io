@@ -14,11 +14,14 @@ Personal resume / research portfolio site. Static HTML + CSS, no build step.
 ## Blog
 
 `blog.html` is a flashcard reader: one paragraph per card, `←` / `→` (or swipe) to
-move between them. It is gated by a password, and the post text is **AES-256-GCM
-encrypted** with a key derived from that password via PBKDF2-SHA256 (310k
-iterations). Only ciphertext is committed — the plaintext never enters this
-public repo, and a visitor without the password has nothing to read in the page
-source.
+move between them. The page never scrolls when you change cards. It is gated by a
+password, and both the post text and the photos are **AES-256-GCM encrypted** with
+one key derived from that password via PBKDF2-SHA256 (310k iterations). Only
+ciphertext is committed — no plaintext or photo ever enters this public repo, and a
+visitor without the password has nothing to read in the page source.
+
+Unlocking is cached in `localStorage`, so it stays unlocked on later visits and the
+gate is removed from the page entirely. "Lock this blog" at the bottom clears it.
 
 ### Publishing a new post
 
@@ -31,26 +34,33 @@ source.
      "cards": [
        { "html": "First paragraph." },
        { "kind": "note", "label": "Disclaimer", "html": "An aside." },
-       { "kind": "pull", "html": "A paragraph set in the serif pull style." }
+       { "kind": "pull", "html": "A paragraph set in the serif pull style." },
+       { "html": "A paragraph with a photo.",
+         "image": { "id": "img3", "alt": "Alt text", "caption": "Optional caption." } }
      ]
    }
    ```
 
    `kind` is optional — `note` for an indented aside, `pull` for a serif emphasis
-   card. `label` adds a small orange chip above the text.
+   card. `label` adds a small orange chip above the text. `image.id` must match a
+   file base name in `drafts/media/` (see below).
 
-2. Encrypt it:
+2. Put photos in `drafts/media/` (also gitignored), named to match the `image.id`
+   values — `drafts/media/img3.jpg` pairs with `"id": "img3"`. JPEG, PNG, WebP,
+   GIF and HEIC are handled. Resizing them to ~1600px first keeps the site quick.
+
+3. Encrypt everything and patch `blog.html` in one step:
 
    ```bash
    node tools/encrypt-post.mjs drafts/my-post.json "nishblog27"
    ```
 
-   The script verifies its own output by decrypting it again before printing.
+   The script encrypts the text inline into `blog.html`, writes one `media/<id>.enc`
+   per photo, verifies every blob by decrypting it again, and warns about cards that
+   reference a photo you haven't added yet (those render text-only rather than
+   breaking).
 
-3. Paste the printed JSON as the contents of the
-   `<script type="application/json" id="post-payload">` tag in `blog.html`.
-
-Changing the password just means re-running step 2 with the new one.
+Changing the password just means re-running step 3 with the new one.
 
 ## Deploy to GitHub Pages
 This repo must be named **`Nishant27-2006.github.io`** (user site).
