@@ -1,0 +1,5 @@
+# Local blog drafts — plaintext, never committed.
+drafts/
+*.draft.json
+.DS_Store
+.claude/settings.local*.json
