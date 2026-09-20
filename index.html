@@ -53,55 +53,112 @@
     .section-divider .container { padding: 0 1.5rem; }
     .section-divider hr { background-color: #ededed; height: 1px; margin: 0; }
 
-    /* ---------- publications ---------- */
+    /* ---------- sections ---------- */
     .section { padding: 3rem 1.5rem; }
-    h2.title.is-3 { margin-bottom: 2rem !important; }
+    h2.title.is-3 { margin-bottom: 1.1rem !important; font-size: 1.6rem; }
 
-    .publication-block { margin-bottom: 2.5rem; }
+    /* ---------- filters ---------- */
+    .filter-bar {
+      display: flex; flex-wrap: wrap; gap: .45rem;
+      margin-bottom: 2.1rem;
+    }
+    .filter-chip {
+      font-family: inherit; font-size: .78rem; font-weight: 600; letter-spacing: .01em;
+      color: #6b6761; background: #fff;
+      border: 1px solid #e6e3de; border-radius: 20px;
+      padding: 4px 13px; cursor: pointer;
+      transition: background .18s ease, border-color .18s ease, color .18s ease;
+    }
+    .filter-chip:hover { border-color: #ddd0bc; color: #36342f; }
+    .filter-chip.is-active { background: #f4ede4; border-color: #e2cfb4; color: #1c1a17; }
+    .filter-chip .chip-count { opacity: .55; margin-left: .35em; font-weight: 500; }
+
+    /* ---------- publications ---------- */
+    .publication-block { margin-bottom: 1.8rem; }
     .publication-block:last-child { margin-bottom: 0; }
     .publication-block.columns { align-items: center; }
+    .publication-block[hidden] { display: none; }
 
     .publication-inner-div {
-      border-radius: 10px;
+      border-radius: 8px;
       overflow: hidden;
       transition: transform .25s ease, box-shadow .25s ease;
     }
     .publication-inner-div:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 18px 38px -22px rgba(10,10,10,.5);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px -20px rgba(10,10,10,.5);
     }
     .pub-figure {
       width: 100%;
       aspect-ratio: 4 / 3;
       background: #fff;
       border: 1px solid #ececec;
-      border-radius: 10px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      padding: .55rem;
+      padding: .45rem;
     }
     .pub-figure img {
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
       display: block;
-      border-radius: 4px;
+      border-radius: 3px;
     }
 
-    .publication-title { line-height: 1.3; margin-bottom: .5em !important; }
+    .publication-title {
+      line-height: 1.35; font-size: 1.02rem;
+      margin-bottom: .4em !important;
+    }
     .publication-title a { color: #3273dc; }
     .publication-venue {
-      font-weight: 700; color: #4a4a4a;
-      display: inline-block; margin-bottom: .6em;
+      font-weight: 700; color: #6b6761;
+      display: inline-block; margin-bottom: .5em;
       background: #f4ede4; border: 1px solid #ecdcc8;
-      padding: 2px 11px; border-radius: 20px; font-size: .82rem;
+      padding: 1px 9px; border-radius: 20px; font-size: .72rem;
+      letter-spacing: .02em;
     }
-    .publication-authors { margin-bottom: .65em; color: #4a4a4a; }
-    .publication-description { color: #4a4a4a; margin-bottom: .9em !important; }
+    .publication-venue.is-news { background: #eaf1fb; border-color: #d5e3f7; color: #3a5a86; }
+    .publication-venue.is-preprint { background: #f1f0ee; border-color: #e3e1dd; }
+    .publication-authors { margin-bottom: .5em; color: #6b6761; font-size: .84rem; }
+    .publication-description {
+      color: #565249; font-size: .9rem; line-height: 1.55;
+      margin-bottom: .7em !important;
+    }
     .author-block-me { color: #1c1a17; font-weight: 700; }
-    .publication-links { margin-top: .25rem; }
+    .publication-links { margin-top: .2rem; }
+    .publication-links .button.is-small {
+      font-size: .74rem; height: 1.9em; padding-left: .7em; padding-right: .8em;
+    }
+
+    /* ---------- quantitative finance ---------- */
+    h2.title.is-3.is-loose { margin-bottom: 1.6rem !important; }
+    .quant-text {
+      color: #565249; font-size: .95rem; line-height: 1.6;
+      margin-bottom: .9em !important;
+    }
+    .quant-stats { margin-top: 1.2rem; }
+    .quant-figure {
+      border: 1px solid #ececec; border-radius: 10px;
+      overflow: hidden; background: #fff; line-height: 0;
+    }
+    .quant-figure img { width: 100%; display: block; }
+    .quant-caption {
+      font-size: .76rem; color: #8a857d; line-height: 1.5;
+      padding: .6rem .8rem; border-top: 1px solid #f0efed;
+    }
+    .quant-stat {
+      display: inline-block; margin-right: 1.6rem; margin-bottom: .9rem;
+    }
+    .quant-stat .stat-value {
+      display: block; font-weight: 700;
+      font-size: 1.4rem; color: #1c1a17; line-height: 1.25;
+    }
+    .quant-stat .stat-label {
+      font-size: .74rem; color: #8a857d; letter-spacing: .04em; text-transform: uppercase;
+    }
 
     @media print {
       html, body { height: auto; font-size: 9pt; }
@@ -189,11 +246,18 @@
   <section class="section">
     <div class="container is-max-desktop">
 
-      <h2 class="title is-3">Publications</h2>
+      <h2 class="title is-3">Publications &amp; News</h2>
+
+      <div class="filter-bar" id="filter-bar">
+        <button class="filter-chip is-active" data-filter="all" type="button">All</button>
+        <button class="filter-chip" data-filter="publication" type="button">Publications</button>
+        <button class="filter-chip" data-filter="preprint" type="button">Preprints</button>
+        <button class="filter-chip" data-filter="news" type="button">News</button>
+      </div>
 
       <!-- A4D -->
-      <div class="publication-block columns is-vcentered">
-        <div class="column is-5">
+      <div class="publication-block columns is-vcentered" data-type="publication">
+        <div class="column is-4">
           <div class="publication-inner-div">
             <div class="pub-figure">
               <img src="paper-a4d.png" alt="A4D functional latent space figure">
@@ -244,8 +308,8 @@
       </div>
 
       <!-- AC-OPF (Stanford / IEEE CAI) -->
-      <div class="publication-block columns is-vcentered">
-        <div class="column is-5">
+      <div class="publication-block columns is-vcentered" data-type="publication">
+        <div class="column is-4">
           <div class="publication-inner-div">
             <div class="pub-figure">
               <img src="paper-opf.png" alt="AC optimal power flow grid figure">
@@ -285,8 +349,8 @@
       </div>
 
       <!-- QuArch (Harvard) -->
-      <div class="publication-block columns is-vcentered">
-        <div class="column is-5">
+      <div class="publication-block columns is-vcentered" data-type="publication">
+        <div class="column is-4">
           <div class="publication-inner-div">
             <div class="pub-figure">
               <img src="paper-quarch.png" alt="QuArch benchmark figure">
@@ -320,6 +384,117 @@
         </div>
       </div>
 
+      <!-- Gaussian processes (preprint) -->
+      <div class="publication-block columns is-vcentered" data-type="preprint">
+        <div class="column is-4">
+          <div class="publication-inner-div">
+            <div class="pub-figure">
+              <img src="paper-gp.png" alt="Objective and gradient norm convergence for adaptive-kappa GP optimization">
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <h3 class="publication-title">
+              <a href="https://arxiv.org/abs/2507.15138">
+                Adaptive Parameter Optimization in Gaussian Processes: A Comprehensive Study of Uncertainty
+                Quantification and Dimensional Scaling
+              </a>
+            </h3>
+            <div class="publication-venue is-preprint">Preprint, arXiv 2025</div>
+            <div class="publication-authors">
+              <span class="author-block author-block-me">Gadde, N.</span>
+            </div>
+            <p class="publication-description">
+              Tunes the exploration parameter of a GP acquisition function during the run instead of fixing it
+              up front. Adaptive schedules converge faster than fixed ones, and the margin widens as
+              dimensionality and observation noise grow. The paper gives convergence guarantees and settings
+              for problems with a small evaluation budget.
+            </p>
+            <div class="publication-links buttons">
+              <a class="external-link button is-small is-rounded" href="https://arxiv.org/abs/2507.15138">
+                <span class="icon"><i class="ai ai-arxiv"></i></span>
+                <span>arXiv</span>
+              </a>
+              <a class="external-link button is-small is-rounded" href="https://arxiv.org/pdf/2507.15138">
+                <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                <span>PDF</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- News: Siri AI -->
+      <div class="publication-block" data-type="news">
+        <div class="content">
+          <div class="publication-venue is-news">News, September 2026</div>
+          <h3 class="publication-title">
+            <a href="https://www.apple.com/newsroom/2026/09/siri-ai-a-profoundly-more-capable-and-personal-assistant-is-here/">
+              Apple ships the new Siri
+            </a>
+          </h3>
+          <p class="publication-description">
+            I interned on Apple's ASE team, where I built ML infrastructure and low-latency model serving for
+            the teams working on Siri AI.
+          </p>
+          <div class="publication-links buttons">
+            <a class="external-link button is-small is-rounded" href="https://www.apple.com/newsroom/2026/09/siri-ai-a-profoundly-more-capable-and-personal-assistant-is-here/">
+              <span class="icon"><i class="fas fa-newspaper"></i></span>
+              <span>Apple Newsroom</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider">
+    <div class="container is-max-desktop"><hr></div>
+  </div>
+
+  <!-- ===================== QUANTITATIVE FINANCE ===================== -->
+  <section class="section">
+    <div class="container is-max-desktop">
+
+      <h2 class="title is-3 is-loose">Quantitative Finance</h2>
+
+      <div class="columns is-vcentered">
+        <div class="column">
+          <div class="content">
+            <p class="quant-text">
+              I trade event contracts on Kalshi and price the positions with models I write myself. The
+              portfolio is up over 300%.
+            </p>
+            <p class="quant-text">
+              I am now building a knowledge graph over related markets to find arbitrage in real time. Contracts
+              that resolve on overlapping outcomes become linked nodes, so a set of prices that cannot all be
+              right surfaces as an inconsistency in the graph.
+            </p>
+            <div class="quant-stats">
+              <div class="quant-stat">
+                <span class="stat-value">300%+</span>
+                <span class="stat-label">Portfolio PnL</span>
+              </div>
+              <div class="quant-stat">
+                <span class="stat-value">+4,717%</span>
+                <span class="stat-label">Single-trade return</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column is-5">
+          <figure class="quant-figure">
+            <img src="kalshi-trade.png" alt="Closed Kalshi position on the Michigan Democratic Senate nominee market">
+            <figcaption class="quant-caption">
+              A closed position on the Michigan Democratic Senate nominee market: Yes on Haley Stevens at 1%,
+              $9.50 in, $457.70 out.
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -335,6 +510,27 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var bar = document.getElementById('filter-bar');
+      if (!bar) return;
+      var items = document.querySelectorAll('.publication-block[data-type]');
+
+      bar.addEventListener('click', function (e) {
+        var chip = e.target.closest('.filter-chip');
+        if (!chip) return;
+        var filter = chip.dataset.filter;
+
+        bar.querySelectorAll('.filter-chip').forEach(function (c) {
+          c.classList.toggle('is-active', c === chip);
+        });
+        items.forEach(function (item) {
+          item.hidden = filter !== 'all' && item.dataset.type !== filter;
+        });
+      });
+    })();
+  </script>
 
 </body>
 
