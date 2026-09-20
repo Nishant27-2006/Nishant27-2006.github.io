@@ -140,14 +140,38 @@
       margin-bottom: .9em !important;
     }
     .quant-stats { margin-top: 1.2rem; }
-    .quant-preprints { margin-top: 3rem; }
-    .quant-subhead {
-      font-size: .74rem; font-weight: 700; letter-spacing: .07em;
-      text-transform: uppercase; color: #8a857d;
-      margin-bottom: 1.4rem;
+
+    /* ---------- timeline ---------- */
+    .timeline { list-style: none; margin: 0; padding: 0; position: relative; }
+    .timeline::before {
+      content: ""; position: absolute;
+      left: 2.35rem; top: .9rem; bottom: .9rem;
+      width: 1px; background: #ececec;
     }
-    .preprint-row { padding-top: 1.4rem; border-top: 1px solid #f0efed; }
-    .preprint-row .content:last-child { margin-bottom: 0; }
+    .timeline li {
+      display: flex; align-items: baseline;
+      padding: .5rem 0; position: relative;
+    }
+    .timeline li::before {
+      content: ""; position: absolute;
+      left: 2.1rem; top: 1.05rem;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #bf5700;
+    }
+    .tl-age {
+      flex: 0 0 2rem; text-align: right;
+      font-weight: 700; font-size: .95rem; color: #1c1a17;
+    }
+    .tl-text {
+      margin-left: 1.55rem;
+      font-size: .92rem; line-height: 1.6; color: #565249;
+    }
+
+    @media screen and (max-width: 480px) {
+      .timeline::before { left: 1.6rem; }
+      .timeline li::before { left: 1.35rem; }
+      .tl-age { flex-basis: 1.4rem; }
+    }
     .quant-figure {
       border: 1px solid #ececec; border-radius: 10px;
       overflow: hidden; background: #fff; line-height: 0;
@@ -187,10 +211,10 @@
           <h1 class="title is-2"><b>Nishant Gadde</b></h1>
           <div class="content has-text-justified">
             <p>
-              I am pursuing a B.S. in <a href="https://www.ece.utexas.edu/">Electrical and Computer
-              Engineering</a> and <a href="https://www.ma.utexas.edu/">Mathematics</a> at the
-              <a href="https://www.utexas.edu/">University of Texas at Austin</a>, where I am part of the
-              <a href="https://cockrell.utexas.edu/admissions/undergraduate/honors-program">Engineering Honors</a> program.
+              I study <a href="https://www.ece.utexas.edu/">ECE</a>
+              (<a href="https://cockrell.utexas.edu/admissions/undergraduate/honors-program">EHP</a>) and
+              <a href="https://www.ma.utexas.edu/">Math</a> at
+              <a href="https://www.utexas.edu/">UT Austin</a>.
             </p>
 
             <p>
@@ -213,9 +237,8 @@
             <p>
               I work on machine learning and its applications to robotics and quantitative finance. I have
               several published and accepted papers, and I peer review for IEEE and ACM undergraduate and
-              postgraduate conferences. In high
-              school I qualified for the AIME three times and competed in USACO Platinum, where I ranked top
-              120 worldwide in 2024–25.
+              postgraduate conferences. In high school I qualified for the AIME three times and competed in
+              USACO Platinum, where I ranked top 120 worldwide in 2024–25.
             </p>
 
             <div class="buttons">
@@ -259,6 +282,7 @@
       <div class="filter-bar" id="filter-bar">
         <button class="filter-chip is-active" data-filter="all" type="button">All</button>
         <button class="filter-chip" data-filter="publication" type="button">Publications</button>
+        <button class="filter-chip" data-filter="preprint" type="button">Preprints</button>
         <button class="filter-chip" data-filter="news" type="button">News</button>
       </div>
 
@@ -391,6 +415,104 @@
         </div>
       </div>
 
+      <!-- Gaussian processes (preprint) -->
+      <div class="publication-block columns is-vcentered" data-type="preprint">
+        <div class="column is-4">
+          <div class="publication-inner-div">
+            <div class="pub-figure">
+              <img src="paper-gp.png" alt="Objective value and gradient norm across iterations for adaptive-kappa GP optimization">
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="content">
+            <h3 class="publication-title">
+              <a href="https://arxiv.org/abs/2507.15138">
+                Adaptive Parameter Optimization in Gaussian Processes: A Comprehensive Study of Uncertainty
+                Quantification and Dimensional Scaling
+              </a>
+            </h3>
+            <div class="publication-venue is-preprint">Preprint, arXiv 2025</div>
+            <div class="publication-authors">
+              <span class="author-block author-block-me">Gadde, N.</span>
+            </div>
+            <p class="publication-description">
+              Tunes the exploration parameter of a GP acquisition function during the run instead of fixing it
+              up front. Adaptive schedules converge faster than fixed ones, and the margin widens as
+              dimensionality and observation noise grow. The paper gives convergence guarantees and settings
+              for problems with a small evaluation budget.
+            </p>
+            <div class="publication-links buttons">
+              <a class="external-link button is-small is-rounded" href="https://arxiv.org/abs/2507.15138">
+                <span class="icon"><i class="ai ai-arxiv"></i></span>
+                <span>arXiv</span>
+              </a>
+              <a class="external-link button is-small is-rounded" href="https://arxiv.org/pdf/2507.15138">
+                <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                <span>PDF</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trust-region (preprint) -->
+      <div class="publication-block" data-type="preprint">
+        <div class="content">
+          <h3 class="publication-title">
+            <a href="https://www.techrxiv.org/doi/abs/10.36227/techrxiv.173221599.90959251/v1">
+              Dynamic Regularization in Trust-Region Optimization for Nonlinear Constraints
+            </a>
+          </h3>
+          <div class="publication-venue is-preprint">Preprint, TechRxiv 2024</div>
+          <div class="publication-authors">
+            <span class="author-block author-block-me">Gadde, N.</span>,
+            <span class="author-block">Mallavaram, S.</span>,
+            <span class="author-block">Wernau, T.</span>
+          </div>
+          <p class="publication-description">
+            A trust-region method with dynamic regularization for high-dimensional nonlinear problems under
+            stress and budget constraints. It reached optimality of 4.4e-9 in 46 iterations with no constraint
+            violations, and the paper reads the solution's sensitivity off the Hessian structure and the
+            per-variable contributions.
+          </p>
+          <div class="publication-links buttons">
+            <a class="external-link button is-small is-rounded" href="https://www.techrxiv.org/doi/abs/10.36227/techrxiv.173221599.90959251/v1">
+              <span class="icon"><i class="fas fa-file-lines"></i></span>
+              <span>TechRxiv</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Conjugate gradient (preprint) -->
+      <div class="publication-block" data-type="preprint">
+        <div class="content">
+          <h3 class="publication-title">
+            <a href="https://www.techrxiv.org/doi/full/10.36227/techrxiv.173385965.50918597/v1">
+              Exploring the Numerical Stability and Efficiency of Conjugate Gradient Methods for Sparse Systems
+            </a>
+          </h3>
+          <div class="publication-venue is-preprint">Preprint, TechRxiv 2024</div>
+          <div class="publication-authors">
+            <span class="author-block author-block-me">Gadde, N.</span>,
+            <span class="author-block">Kommisetty, S.</span>,
+            <span class="author-block">Harris, J.</span>
+          </div>
+          <p class="publication-description">
+            Measures how conjugate gradient behaves on a large sparse system: the conditioning and eigenvalue
+            spread that keep the solve numerically stable, the relative error curve across iterations, and the
+            sparsity pattern that makes sparse storage worth the bookkeeping.
+          </p>
+          <div class="publication-links buttons">
+            <a class="external-link button is-small is-rounded" href="https://www.techrxiv.org/doi/full/10.36227/techrxiv.173385965.50918597/v1">
+              <span class="icon"><i class="fas fa-file-lines"></i></span>
+              <span>TechRxiv</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
       <!-- News: Siri AI -->
       <div class="publication-block" data-type="news">
         <div class="content">
@@ -461,104 +583,27 @@
         </div>
       </div>
 
-      <div class="quant-preprints">
-        <h3 class="quant-subhead">Optimization preprints</h3>
+    </div>
+  </section>
 
-        <div class="publication-block columns is-vcentered">
-          <div class="column is-4">
-            <div class="publication-inner-div">
-              <div class="pub-figure">
-                <img src="paper-gp.png" alt="Objective value and gradient norm across iterations for adaptive-kappa GP optimization">
-              </div>
-            </div>
-          </div>
-          <div class="column">
-            <div class="content">
-              <h3 class="publication-title">
-                <a href="https://arxiv.org/abs/2507.15138">
-                  Adaptive Parameter Optimization in Gaussian Processes: A Comprehensive Study of Uncertainty
-                  Quantification and Dimensional Scaling
-                </a>
-              </h3>
-              <div class="publication-venue is-preprint">Preprint, arXiv 2025</div>
-              <div class="publication-authors">
-                <span class="author-block author-block-me">Gadde, N.</span>
-              </div>
-              <p class="publication-description">
-                Tunes the exploration parameter of a GP acquisition function during the run instead of fixing
-                it up front. Adaptive schedules converge faster than fixed ones, and the margin widens as
-                dimensionality and observation noise grow. The paper gives convergence guarantees and settings
-                for problems with a small evaluation budget.
-              </p>
-              <div class="publication-links buttons">
-                <a class="external-link button is-small is-rounded" href="https://arxiv.org/abs/2507.15138">
-                  <span class="icon"><i class="ai ai-arxiv"></i></span>
-                  <span>arXiv</span>
-                </a>
-                <a class="external-link button is-small is-rounded" href="https://arxiv.org/pdf/2507.15138">
-                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
-                  <span>PDF</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div class="section-divider">
+    <div class="container is-max-desktop"><hr></div>
+  </div>
 
-        <div class="preprint-row">
-          <div class="content">
-            <h3 class="publication-title">
-              <a href="https://www.techrxiv.org/doi/abs/10.36227/techrxiv.173221599.90959251/v1">
-                Dynamic Regularization in Trust-Region Optimization for Nonlinear Constraints
-              </a>
-            </h3>
-            <div class="publication-venue is-preprint">Preprint, TechRxiv 2024</div>
-            <div class="publication-authors">
-              <span class="author-block author-block-me">Gadde, N.</span>,
-              <span class="author-block">Mallavaram, S.</span>,
-              <span class="author-block">Wernau, T.</span>
-            </div>
-            <p class="publication-description">
-              A trust-region method with dynamic regularization for high-dimensional nonlinear problems under
-              stress and budget constraints. It reached optimality of 4.4e-9 in 46 iterations with no
-              constraint violations, and the paper reads the solution's sensitivity off the Hessian structure
-              and the per-variable contributions.
-            </p>
-            <div class="publication-links buttons">
-              <a class="external-link button is-small is-rounded" href="https://www.techrxiv.org/doi/abs/10.36227/techrxiv.173221599.90959251/v1">
-                <span class="icon"><i class="fas fa-file-lines"></i></span>
-                <span>TechRxiv</span>
-              </a>
-            </div>
-          </div>
-        </div>
+  <!-- ===================== TIMELINE ===================== -->
+  <section class="section">
+    <div class="container is-max-desktop">
 
-        <div class="preprint-row">
-          <div class="content">
-            <h3 class="publication-title">
-              <a href="https://www.techrxiv.org/doi/full/10.36227/techrxiv.173385965.50918597/v1">
-                Exploring the Numerical Stability and Efficiency of Conjugate Gradient Methods for Sparse Systems
-              </a>
-            </h3>
-            <div class="publication-venue is-preprint">Preprint, TechRxiv 2024</div>
-            <div class="publication-authors">
-              <span class="author-block author-block-me">Gadde, N.</span>,
-              <span class="author-block">Kommisetty, S.</span>,
-              <span class="author-block">Harris, J.</span>
-            </div>
-            <p class="publication-description">
-              Measures how conjugate gradient behaves on a large sparse system: the conditioning and eigenvalue
-              spread that keep the solve numerically stable, the relative error curve across iterations, and
-              the sparsity pattern that makes sparse storage worth the bookkeeping.
-            </p>
-            <div class="publication-links buttons">
-              <a class="external-link button is-small is-rounded" href="https://www.techrxiv.org/doi/full/10.36227/techrxiv.173385965.50918597/v1">
-                <span class="icon"><i class="fas fa-file-lines"></i></span>
-                <span>TechRxiv</span>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+      <h2 class="title is-3 is-loose">Timeline</h2>
+
+      <ul class="timeline">
+        <li><span class="tl-age">2</span><span class="tl-text">Solved a 1,000 piece puzzle.</span></li>
+        <li><span class="tl-age">11</span><span class="tl-text">Solved a Rubik's cube in under 30 seconds.</span></li>
+        <li><span class="tl-age">16</span><span class="tl-text">Qualified for the AIME.</span></li>
+        <li><span class="tl-age">17</span><span class="tl-text">Made top 120 worldwide in USACO Platinum and presented at my first IEEE conference.</span></li>
+        <li><span class="tl-age">18</span><span class="tl-text">Presented at several more IEEE conferences and built trading models for holdings companies, running about 70% PnL.</span></li>
+        <li><span class="tl-age">19</span><span class="tl-text">Worked at Apple. Papers accepted to ICML and CoRL.</span></li>
+      </ul>
 
     </div>
   </section>
